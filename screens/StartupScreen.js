@@ -3,8 +3,7 @@ import { Image, StyleSheet, Text, View, TouchableOpacity, ScrollView} from 'reac
 import logo from './assets/logo.png'; 
 import { TextInput, Appbar, Button} from 'react-native-paper';
 
-
-class App extends React.Component {
+export default class StartupScreen extends React.Component {
 
 
 state={
@@ -12,18 +11,18 @@ state={
   textinput: ''
 }
 
-componentDidMount(){
-fetch("https://tranquil-reaches-97237.herokuapp.com/api/elevators")
-.then(data=>data.json())
-.then(data2=>{
-  // console.log(data2)
-  this.setState({
-    id:data2[0].id
+// componentDidMount(){
+// fetch("https://tranquil-reaches-97237.herokuapp.com/api/elevators")
+// .then(data=>data.json())
+// .then(data2=>{
+//   // console.log(data2)
+//   this.setState({
+//     id:data2[0].id
 
 
-  })
-})
-}
+//   })
+// })
+// }
 render() {
   // console.log("from render")
   return (
@@ -57,7 +56,7 @@ render() {
       </TouchableOpacity>
       
       {/* <ScrollView> */}
-      <Text style={styles.elevatorId}> Elevator ID: {this.state.id}</Text>      
+      {/* <Text style={styles.elevatorId}> Elevator ID: {this.state.id}</Text>       */}
       {/* <Text style={styles.elevatorIdText}> {this.state.id} </Text> */}
 
          {/* </ScrollView> */}
@@ -66,7 +65,7 @@ render() {
 }
 }
 
-export default  App;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
