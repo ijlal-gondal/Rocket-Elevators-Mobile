@@ -6,7 +6,7 @@ class App extends React.Component {
 
 
 state={
-  id: "loading",
+  id: "Loading",
 }
 
 componentDidMount(){
@@ -16,6 +16,7 @@ fetch("https://tranquil-reaches-97237.herokuapp.com/api/elevators")
   console.log(data2)
   this.setState({
     id:data2[0].id
+
 
   })
 })
