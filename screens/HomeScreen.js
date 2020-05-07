@@ -1,7 +1,8 @@
+import 'react-native-gesture-handler';
 import React,{useState,useEffect} from 'react';
 import { ActivityIndicator,FlatList,Image, StyleSheet, Text, View, TouchableOpacity, ScrollView} from 'react-native';
 import {  Appbar, Button} from 'react-native-paper';
-const HomeScreen=()=> {
+const HomeScreen=(props)=> {
 
 
         const [isLoading, setLoading] = useState(true);
@@ -32,7 +33,11 @@ const HomeScreen=()=> {
           keyExtractor={({ id }, index) => id}
           renderItem={({ item }) => (
             <Button style={styles.buttonText}
-            icon="login" mode="outlined" onPress={() => console.log(item.id,item.status)}>
+            icon="login" mode="outlined" onPress={() => {
+                // onPress event fires with an event object
+                props.navigation.navigate('ElevatorStatus', {
+                    id: item.id });
+            }}>
          {item.id}
           </Button>
 
@@ -44,6 +49,8 @@ const HomeScreen=()=> {
          </View>
     )
 }
+
+// console.log(item.id,item.status)
 // }
 const styles = StyleSheet.create({
     container: {

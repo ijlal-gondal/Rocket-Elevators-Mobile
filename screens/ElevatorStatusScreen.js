@@ -1,13 +1,14 @@
+import 'react-native-gesture-handler';
 import React,{useState,useEffect} from 'react';
 import { ActivityIndicator,FlatList,Image, StyleSheet, Text, View, TouchableOpacity, ScrollView} from 'react-native';
 import {  Appbar, Button} from 'react-native-paper';
 
-const ElevatorStatusScreen=()=> {
+const ElevatorStatusScreen=(props)=> {
 
-
+    const { id } = props.route.params;
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
-    var id = 2;
+    // var id = props.navigation.id;
 useEffect(()=>{
       fetch(`https://tranquil-reaches-97237.herokuapp.com/api/elevators/${id}`)
         .then((response) => response.json())
@@ -66,7 +67,7 @@ console.log(data)
 )}
 
 <Button style={styles.buttonText}
-    icon="logout" mode="outlined" onPress={() => navigation.goBack()}>
+    icon="logout" mode="outlined" onPress={() => props.navigation.navigate("Home")}>
  Back
   </Button>  
 </View>

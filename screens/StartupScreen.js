@@ -1,13 +1,14 @@
+import 'react-native-gesture-handler';
 import React,{useState,useEffect} from 'react';
 import { TextInput,ActivityIndicator,Image, StyleSheet, Text, View, TouchableOpacity, ScrollView, FlatList} from 'react-native';
 // import logo from './assets/logo.png'; 
 import {  Appbar, Button} from 'react-native-paper';
 
-const StartupScreen=()=> {
+const StartupScreen=(props)=> {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [value, onChangeText] = React.useState('Email');
-useEffect(()=>{
+useEffect(()=>{ 
     fetch('https://tranquil-reaches-97237.herokuapp.com/api/employees')
       .then((response) => response.json())
       .then((json) => setData(json))
@@ -74,6 +75,7 @@ function findArrayElementByTitle(array, title) {
         <Text style={styles.buttonText}>Login!</Text> */}
         <Button style = {{margin:10}}
          icon="login" mode="contained" onPress={() => {if (findArrayElementByTitle(data,value) != undefined) {
+           props.navigation.navigate("Home")
            console.log("true")
          } else {
 console.log("The email entered is not the email of a listed agent, please try again!")

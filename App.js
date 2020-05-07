@@ -1,4 +1,4 @@
-// import 'react-native-gesture-handler';
+ import 'react-native-gesture-handler';
 import React from 'react';
 import { Image, StyleSheet, Text, View, TouchableOpacity, ScrollView, Button} from 'react-native';
 import logo from './assets/logo.png'; 
@@ -9,15 +9,33 @@ import  StartupScreen from './screens/StartupScreen'
 import  HomeScreen from './screens/HomeScreen'
 import  ElevatorStatusScreen from './screens/ElevatorStatusScreen'
 
-export default function App() {
+const Stack = createStackNavigator();
+
+function App() {
   return (
      <View style={styles.container}>
-{/* <StartupScreen /> */}
-{/* <HomeScreen /> */}
-<ElevatorStatusScreen />
+      <Stack.Navigator>
+         <Stack.Screen name="Startup" component={StartupScreen} />
+         <Stack.Screen name="Home" component={HomeScreen} />
+         <Stack.Screen name="ElevatorStatus" component={ElevatorStatusScreen} />
+      </Stack.Navigator>
 </View>
   );
 }
+
+export default ()=>{
+  return(
+    <NavigationContainer>
+<App/>
+    </NavigationContainer>
+  )
+}
+
+{/* <StartupScreen /> */}
+{/* <HomeScreen /> */}
+{/* <ElevatorStatusScreen /> */}
+
+
 // function StartupScreen({ navigation }) {
 //   return (
 //     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -55,7 +73,7 @@ export default function App() {
 //   );
 // }
 
-// const Stack = createStackNavigator();
+
 
 // function App() {
 //   return (
