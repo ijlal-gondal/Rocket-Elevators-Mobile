@@ -23,6 +23,8 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": "an application intended for the company's maintenance agents who need to interact with the infrastructures they support and maintain. ",
+    "githubUrl": "https://github.com/ijlal-gondal/Rocket-Elevators-Mobile"
   }
 }
