@@ -1,22 +1,41 @@
 import 'react-native-gesture-handler';
 import React,{useState,useEffect} from 'react';
-import { ActivityIndicator,FlatList,Image, StyleSheet, Text, View, TouchableOpacity, ScrollView} from 'react-native';
+import { ActivityIndicator,ImageBackground,Image, StyleSheet, Text, View, TouchableOpacity, ScrollView} from 'react-native';
 import {  Appbar, Button} from 'react-native-paper';
+import image from './assets/splash.jpg';  
 
 const ElevatorStatusScreen=(props)=> {
 
     const { id } = props.route.params;
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
-    // var id = props.navigation.id;
+
+// function checkStatus() {
 useEffect(()=>{
       fetch(`https://tranquil-reaches-97237.herokuapp.com/api/elevators/${id}`)
         .then((response) => response.json())
         .then((json) => setData(json))
         .catch((error) => console.error(error))
         .finally(() => setLoading(false));                      
-    }, []);
+    }, [data]);
 
+useEffect(() => {
+        return () => {
+          console.log("cleaned up");
+        };
+      }, []);
+// }
+
+function getMoviesFromApi() {
+    return fetch('https://reactnative.dev/movies.json')
+      .then((response) => response.json())
+      .then((json) => {
+        return json.movies;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 function updateStatus() {
     fetch(`https://tranquil-reaches-97237.herokuapp.com/api/elevators/${id}`, {
         method: 'POST',
@@ -30,46 +49,56 @@ function updateStatus() {
       })
       .then((response) => response.text())
       .then((responseText) => {
-        alert(responseText);
+        alert(responseText),
+        getMoviesFromApi();
       })
       .catch((error) => {
           console.error(error);
       });
     };
 
-console.log(data)
+// console.log(data)
     return (
         <View>
-<Text> Hello from ElevatorStatusScreen</Text>
-      {/* <ScrollView>
-       <Text style={styles.elevatorId}> Elevator ID: {this.state.id}</Text>      
-       <Text style={styles.elevatorIdText}> {this.state.id} </Text>
+              <TouchableOpacity>
+{/* <ImageBackground source={image} style={styles.image}> */}
 
-         </ScrollView> */}
-      <Button style={styles.buttonText}
-    icon="switch" mode="outlined" onPress={() => updateStatus()}>
- Change Status
-  </Button>  
 
 {isLoading ? <ActivityIndicator/> : (
-
-<FlatList
-  data={data}
-  keyExtractor={({ id }, index) => id}
-  renderItem={({ item }) => (
-    <Button style={styles.buttonText}
-    icon="login" mode="outlined" onPress={() => console.log(item.id,item.status)}>
- {item.id}
-  </Button>
+    <Text  style={[
+        styles.status,
+        data.status == "Inactive" ?
+        { backgroundColor: 'red' } 
+        : { backgroundColor: 'green' }
+    ]}>
+{data.status}
+  </Text>
 
   )}
-/>
-)}
+
+
+{/* 
+{isLoading ? <ActivityIndicator/> : (
+    <Text style={styles.newstatus} onPress={console.log(json.movies)}>
+{json.movies}
+  </Text>
+
+  )} */}
+
+
+      <Button style={styles.buttonText}
+    icon="switch" mode="outlined" onPress={() => updateStatus()}>
+ End Task
+  </Button>  
+
+
 
 <Button style={styles.buttonText}
     icon="logout" mode="outlined" onPress={() => props.navigation.navigate("Home")}>
  Back
   </Button>  
+  </TouchableOpacity>
+   {/* </ImageBackground> */}
 </View>
     );
 }
@@ -79,8 +108,8 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#fff',
-      // alignItems: 'center',
-      // justifyContent: 'center',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     instructions: {
       color: '#888',
@@ -88,10 +117,13 @@ const styles = StyleSheet.create({
       margin: 15,
   
     }, 
-    button: {
-      backgroundColor: "blue",
+    status: {
       padding: 20,
       borderRadius: 5,
+      color: "white",
+      textAlign: "center",
+      fontWeight: "bold",
+      fontSize: 20,
     },
     buttonText: {
       fontSize: 20,
@@ -111,7 +143,12 @@ const styles = StyleSheet.create({
       fontSize: 20,
       color: '#fff',
   
-    }
+    },
+    image: {
+        flex: 1,
+        resizeMode: "cover",
+        justifyContent: "center"
+      }
   });
   
   

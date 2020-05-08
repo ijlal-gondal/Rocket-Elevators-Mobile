@@ -1,7 +1,9 @@
 import 'react-native-gesture-handler';
 import React,{useState,useEffect} from 'react';
-import { ActivityIndicator,FlatList,Image, StyleSheet, Text, View, TouchableOpacity, ScrollView} from 'react-native';
-import {  Appbar, Button} from 'react-native-paper';
+import { ActivityIndicator,FlatList,Image, StyleSheet, Text, View, TouchableOpacity, ImageBackground, ScrollView} from 'react-native';
+import {  FAB, Appbar, Button} from 'react-native-paper';
+import image from './assets/splash.jpg';  
+
 const HomeScreen=(props)=> {
 
 
@@ -15,17 +17,26 @@ const HomeScreen=(props)=> {
             .catch((error) => console.error(error))
             .finally(() => setLoading(false));
         }, []);
-// render() {
-   //   // console.log("from render") 
+
 
     return (
         <View>
 
-    
+{/* <ImageBackground source={image} style={styles.image}> */}
+<Button icon="logout" mode="contained" onPress={() => props.navigation.navigate('Startup')}>
+   Log Out!
+  </Button>
 
+  <TouchableOpacity>
+  {/* <FAB
+    style={styles.fab}
+    label = "Logout"
+    icon="logout"
+    onPress={() => console.log('Pressed')}
+  /> */}
 
-          {/* <ScrollView>   </ScrollView> */}
-
+           {/* <ScrollView>   */}
+        
 {isLoading ? <ActivityIndicator/> : (
 
         <FlatList
@@ -45,13 +56,15 @@ const HomeScreen=(props)=> {
         />
       )}
 
-         
+
+  </TouchableOpacity>
+ {/* </ScrollView>  */}
+ {/* </ImageBackground> */}
          </View>
     )
 }
 
-// console.log(item.id,item.status)
-// }
+
 const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -90,7 +103,19 @@ const styles = StyleSheet.create({
       fontSize: 20,
       color: '#fff',
   
-    }
+    },
+    fab: {
+        position: 'absolute',
+        margin: 16,
+        right: 10,
+        top: 130
+        ,
+      },
+      image: {
+        flex: 1,
+        resizeMode: "cover",
+        justifyContent: "center"
+      }
   });
 
 export default HomeScreen
