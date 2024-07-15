@@ -13,7 +13,7 @@
     "@react-navigation/compat": "^5.1.15",
     "@react-navigation/native": "^5.2.4",
     "@react-navigation/stack": "^5.2.19",
-    "expo": "~37.0.3",
+    "expo": "~51.0.20",
     "jest-expo": "^47.0.1",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
@@ -23,7 +23,7 @@
     "react-native-reanimated": "^2.10.0",
     "react-native-safe-area-context": "^0.7.3",
     "react-native-screens": "^2.2.0",
-    "react-native-web": "~0.11.7",
+    "react-native-web": "~0.19.12",
     "react-navigation": "^4.3.9"
   },
 "jest": {
